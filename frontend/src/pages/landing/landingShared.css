@@ -1,0 +1,254 @@
+/* Shared marketing / intro shell — aurora, minimal, cinematic */
+
+.landing-body {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  color: var(--text);
+  background: #070b14;
+  --landing-glow: rgba(16, 163, 127, 0.45);
+  --landing-glow2: rgba(96, 165, 250, 0.35);
+}
+
+.landing-body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(96, 165, 250, 0.12), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(16, 163, 127, 0.08), transparent 50%),
+    radial-gradient(ellipse 50% 35% at 10% 80%, rgba(168, 85, 247, 0.06), transparent 45%),
+    linear-gradient(180deg, #070b14, #080d18 50%, #070b14);
+}
+
+.landing-body::after {
+  content: '';
+  position: fixed;
+  inset: -30%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background:
+    radial-gradient(40% 28% at 18% 22%, rgba(96, 165, 250, 0.2), transparent 70%),
+    radial-gradient(36% 26% at 82% 28%, rgba(16, 163, 127, 0.18), transparent 70%);
+  filter: blur(48px);
+  animation: landingAuroraDrift 24s ease-in-out infinite alternate;
+}
+
+@keyframes landingAuroraDrift {
+  0% { transform: translate3d(-2%, -1%, 0) scale(1); }
+  100% { transform: translate3d(2%, 1%, 0) scale(1.04); }
+}
+
+.landing-particles {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.06) 0, transparent 1px),
+    radial-gradient(circle at 78% 42%, rgba(255, 255, 255, 0.05) 0, transparent 1px),
+    radial-gradient(circle at 44% 88%, rgba(255, 255, 255, 0.04) 0, transparent 1px),
+    radial-gradient(circle at 62% 12%, rgba(255, 255, 255, 0.035) 0, transparent 1px),
+    radial-gradient(circle at 28% 62%, rgba(255, 255, 255, 0.04) 0, transparent 1px);
+  background-size: 100% 100%;
+}
+
+.landing-inner {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px 48px;
+}
+
+.landing-top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  background: linear-gradient(180deg, rgba(7, 11, 20, 0.85), transparent);
+}
+
+.landing-top-nav a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text2);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.landing-top-nav a:hover {
+  color: var(--text);
+}
+
+.landing-btn-secondary {
+  position: relative;
+  padding: 11px 22px;
+  border-radius: 10px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid rgba(110, 129, 177, 0.35);
+  background: rgba(13, 18, 34, 0.5);
+  color: var(--text);
+  box-shadow: 0 0 0 0 rgba(96, 165, 250, 0);
+  transition:
+    border-color 0.22s ease,
+    box-shadow 0.28s ease,
+    transform 0.18s ease,
+    background 0.22s ease;
+}
+
+.landing-btn-secondary:hover {
+  border-color: rgba(138, 160, 211, 0.55);
+  box-shadow: 0 0 28px rgba(96, 165, 250, 0.12);
+  background: rgba(19, 26, 43, 0.65);
+}
+
+.landing-btn-secondary:active {
+  transform: scale(0.98);
+}
+
+.landing-btn-primary {
+  position: relative;
+  overflow: hidden;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  background: linear-gradient(135deg, #10a37f 0%, #0d8f6e 100%);
+  box-shadow:
+    0 0 0 1px rgba(16, 163, 127, 0.35),
+    0 0 32px rgba(16, 163, 127, 0.35),
+    0 4px 20px rgba(0, 0, 0, 0.35);
+  transition: transform 0.18s ease, box-shadow 0.25s ease, filter 0.2s ease;
+  animation: landingCtaPulse 2.8s ease-in-out infinite;
+}
+
+.landing-btn-primary:hover {
+  filter: brightness(1.06);
+  box-shadow:
+    0 0 0 1px rgba(16, 163, 127, 0.5),
+    0 0 44px rgba(16, 163, 127, 0.45),
+    0 6px 24px rgba(0, 0, 0, 0.4);
+}
+
+.landing-btn-primary:active {
+  transform: scale(0.98);
+}
+
+.landing-btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  background: radial-gradient(circle at var(--rx, 50%) var(--ry, 50%), rgba(255, 255, 255, 0.35) 0%, transparent 55%);
+  transform: scale(0.4);
+  transition: opacity 0.35s ease, transform 0.45s ease;
+  pointer-events: none;
+}
+
+.landing-btn-primary.is-pressing::after {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+@keyframes landingCtaPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(16, 163, 127, 0.35),
+      0 0 28px rgba(16, 163, 127, 0.28),
+      0 4px 20px rgba(0, 0, 0, 0.35);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(16, 163, 127, 0.45),
+      0 0 40px rgba(16, 163, 127, 0.4),
+      0 4px 20px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* —— Workspace entry overlay —— */
+.workspace-entry-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+.workspace-entry-dim {
+  position: absolute;
+  inset: 0;
+  background: #020508;
+  will-change: opacity;
+}
+
+.workspace-entry-glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(120vw, 900px);
+  height: min(120vw, 900px);
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(16, 163, 127, 0.5) 0%,
+    rgba(96, 165, 250, 0.22) 38%,
+    transparent 68%
+  );
+  filter: blur(2px);
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+.workspace-entry-logo-wrap {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.workspace-entry-logo {
+  width: clamp(120px, 28vw, 200px);
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid rgba(138, 160, 211, 0.35);
+  box-shadow: 0 0 40px rgba(16, 163, 127, 0.25);
+  object-fit: cover;
+  object-position: 23% center;
+  will-change: transform, opacity, filter;
+}
+
+.workspace-entry-status {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(232, 238, 255, 0.75);
+  min-height: 1.4em;
+}

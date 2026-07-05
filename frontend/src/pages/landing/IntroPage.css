@@ -1,0 +1,81 @@
+.intro-page .landing-inner {
+  padding-top: 56px;
+}
+
+.intro-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 520px;
+}
+
+.intro-logo-block {
+  position: relative;
+  margin-bottom: 28px;
+}
+
+.intro-logo-glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 200px;
+  height: 200px;
+  margin: -100px 0 0 -100px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(16, 163, 127, 0.35) 0%,
+    rgba(96, 165, 250, 0.15) 45%,
+    transparent 70%
+  );
+  filter: blur(12px);
+  pointer-events: none;
+}
+
+.intro-logo-img {
+  position: relative;
+  width: clamp(100px, 22vw, 140px);
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid rgba(138, 160, 211, 0.35);
+  box-shadow:
+    0 0 32px rgba(16, 163, 127, 0.2),
+    0 12px 40px rgba(0, 0, 0, 0.35);
+  object-fit: cover;
+  object-position: 23% center;
+}
+
+.intro-title {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #e8eeff 0%, #a6b4d5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.intro-tagline {
+  font-size: 1.05rem;
+  color: var(--text2);
+  font-weight: 400;
+  margin-bottom: 36px;
+}
+
+.intro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro-link-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
