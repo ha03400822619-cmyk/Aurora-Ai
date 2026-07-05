@@ -10,7 +10,10 @@ const genAI = process.env.GEMINI_API_KEY ? new GoogleGenerativeAI(process.env.GE
 
 const NOTE_AI_ACTIONS = new Set(['summarize', 'explain_simple', 'key_points', 'flashcards']);
 
-const UPLOAD_NOTES_DIR = path.join(__dirname, '../uploads/notes');
+const isVercel = process.env.VERCEL === '1';
+const UPLOAD_NOTES_DIR = isVercel 
+  ? path.join('/tmp', 'uploads/notes') 
+  : path.join(__dirname, '../uploads/notes');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {

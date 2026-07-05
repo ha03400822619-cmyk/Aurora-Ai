@@ -34,11 +34,15 @@ async function getDb() {
 
 function saveDb() {
   if (!db) return;
-  const data = db.export();
-  const buffer = Buffer.from(data);
-  const dir = path.dirname(DB_PATH);
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(DB_PATH, buffer);
+  try {
+    const data = db.export();
+    const buffer = Buffer.from(data);
+    const dir = path.dirname(DB_PATH);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(DB_PATH, buffer);
+  } catch (err) {
+    console.warn("⚠️ Unable to save SQLite DB to disk (likely serverless read-only filesystem):", err.message);
+  }
 }
 
 function initSchema() {
