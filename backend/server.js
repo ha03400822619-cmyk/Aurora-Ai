@@ -41,6 +41,7 @@ app.use('/api/dashboard', require('./routes/dashboard'));
 
 // Health check
 app.get('/api/health', (req, res) => res.json({ status: 'ok', message: 'Aurora API running' }));
+app.get('/', (req, res) => res.send('Aurora AI API is running!'));
 
 const frontendBuild = path.join(__dirname, '../frontend/build');
 if (process.env.SERVE_FRONTEND === 'true' && fs.existsSync(frontendBuild)) {
