@@ -1,3 +1,12 @@
+---
+title: Aurora Ai
+emoji: 🏢
+colorFrom: green
+colorTo: red
+sdk: docker
+pinned: false
+---
+
 # ◈ Aurora — AI-Powered Study Website (SQLite Edition)
 
 An intelligent study platform where students can ask AI questions, upload notes, and take AI-generated quizzes.  
