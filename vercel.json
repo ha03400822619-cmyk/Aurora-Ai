@@ -3,18 +3,12 @@
     "frontend": {
       "root": "frontend",
       "framework": "create-react-app"
-    },
-    "backend": {
-      "root": "backend",
-      "framework": "express"
     }
   },
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": {
-        "service": "backend"
-      }
+      "destination": "https://husnain1233-aurora-ai.hf.space/api/:path*"
     },
     {
       "source": "/(.*)",
