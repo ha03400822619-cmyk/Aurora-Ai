@@ -14,3 +14,17 @@ frontend/.env.local
 # OS / editor
 .DS_Store
 Thumbs.db
+
+# SQLite database and tools
+backend/database/study_assistant.sqlite
+sqlite-tools/
+
+# User uploads and binary data
+backend/uploads/
+backend/eng.traineddata
+
+# Binaries
+*.exe
+*.traineddata
+*.sqlite
+
