@@ -32,6 +32,7 @@ export default function Layout() {
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [themeMode, setThemeMode] = useState(() => localStorage.getItem('aurora-theme') || 'aurora');
   const [accentColor, setAccentColor] = useState(() => localStorage.getItem('aurora-accent') || '#10a37f');
   const [isNavigating, setIsNavigating] = useState(false);
@@ -176,7 +177,13 @@ export default function Layout() {
     });
   };
 
+  const mobileTitle = useMemo(() => {
+    const item = navItems.find((n) => location.pathname.startsWith(n.to));
+    return item ? item.label : 'Aurora AI';
+  }, [location.pathname]);
+
   const handleNavClick = (to) => {
+    setMobileMenuOpen(false);
     // Prevent re-navigating to the exact same route; it can leave transition state stuck.
     if (to === location.pathname) return;
     // Keep section-level nav behavior (Dashboard, Chat, Notes, etc.) unchanged.
@@ -210,6 +217,7 @@ export default function Layout() {
   };
 
   const onStartNewChat = () => {
+    setMobileMenuOpen(false);
     setPressedNav('/chat');
     navigate('/chat', { state: { newChat: true } });
     setTimeout(() => setPressedNav(''), 140);
@@ -224,8 +232,37 @@ export default function Layout() {
   }
 
   return (
-    <div className={`layout${collapsed ? ' collapsed' : ''}${isChatRoute ? ' layout--chat-route' : ''}`}>
+    <div className={`layout${collapsed ? ' collapsed' : ''}${isChatRoute ? ' layout--chat-route' : ''}${mobileMenuOpen ? ' mobile-menu-open' : ''}`}>
+      {mobileMenuOpen && (
+        <div
+          className="mobile-sidebar-backdrop"
+          onClick={() => setMobileMenuOpen(false)}
+          role="presentation"
+        />
+      )}
       {profileOpen && <button type="button" className="profile-backdrop" aria-label="Close profile panel" onClick={() => setProfileOpen(false)} />}
+      
+      {/* Mobile Top Header */}
+      <header className="mobile-header">
+        <button
+          type="button"
+          className="mobile-menu-toggle"
+          onClick={() => setMobileMenuOpen(true)}
+          aria-label="Open menu"
+        >
+          ☰
+        </button>
+        <span className="mobile-header-title">{mobileTitle}</span>
+        <button
+          type="button"
+          className="mobile-new-chat-btn"
+          onClick={onStartNewChat}
+          aria-label="New chat"
+        >
+          ＋
+        </button>
+      </header>
+
       <aside className="sidebar">
         <button
           type="button"

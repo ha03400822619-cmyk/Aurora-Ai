@@ -669,25 +669,125 @@
   }
 }
 
+/* Mobile Top Header (hidden on desktop) */
+.mobile-header {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0 16px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.mobile-menu-toggle {
+  background: none;
+  border: none;
+  color: var(--text2);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-header-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.mobile-new-chat-btn {
+  background: none;
+  border: none;
+  color: var(--text2);
+  font-size: 22px;
+  cursor: pointer;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 99;
+  animation: fadeIn 0.2s ease;
+}
+
+/* Responsive Media Queries */
 @media (max-width: 768px) {
   .layout,
   .layout.collapsed {
-    grid-template-columns: 64px minmax(0, 1fr);
+    grid-template-columns: 1fr; /* Full screen width for content! */
+    grid-template-rows: 56px minmax(0, 1fr); /* Top header + content area */
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
   }
+  
+  @supports (height: 100dvh) {
+    .layout,
+    .layout.collapsed {
+      height: 100dvh;
+      max-height: 100dvh;
+    }
+  }
+
+  .mobile-header {
+    display: flex; /* Show top header only on mobile! */
+  }
+
+  /* The Sidebar Drawer */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 260px !important; /* Force width */
+    max-width: 80% !important;
+    height: 100% !important;
+    z-index: 100;
+    transform: translateX(-100%); /* Slide it completely out of view! */
+    transition: transform 0.3s cubic-bezier(0.18, 1, 0.38, 1);
+    box-shadow: none;
+  }
+
+  /* When menu is toggled, slide it IN! */
+  .layout.mobile-menu-open .sidebar {
+    transform: translateX(0);
+    box-shadow: 8px 0 24px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Hide toggle button inside drawer since close is handled by backdrop */
   .sidebar-toggle-btn {
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
+    display: none !important;
   }
+
+  /* Sidebar contents visible inside drawer */
   .brand-name,
   .nav-label,
   .user-details {
-    display: none;
+    display: block !important;
   }
+
   .main-content {
     padding: 16px;
+    height: 100%;
+    overflow-y: auto;
   }
+
   .main-content.main-content--chat {
     padding: 0;
+    height: 100%;
   }
 }
